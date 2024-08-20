@@ -1,6 +1,7 @@
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:watch_one_piece/widgets/home_widgets/home_carousel.dart';
+import 'package:watch_one_piece/widgets/home_widgets/home_scrollview.dart';
+import 'package:watch_one_piece/widgets/one_piece_logo.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,56 +22,38 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Center(
-              child: Image(
-                width: MediaQuery.sizeOf(context).width / 2,
-                height: 50,
-                image: const AssetImage("assets/images/one_piece_logo.png"),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: const OnePieceLogo(),
+      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              // top carousel
+              HomeCarousel(
+                itemsList: itemsList,
+                current: _current,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _current = index;
+                  });
+                },
               ),
-            ),
-            CarouselSlider(
-              options: CarouselOptions(
-                  height: 250.0,
-                  viewportFraction: 1.5,
-                  initialPage: 0,
-                  scrollDirection: Axis.horizontal,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
-                  }),
-              items: itemsList
-                  .map(
-                    (item) => itemsList.isEmpty
-                        ? Image.asset(
-                            width: MediaQuery.of(context).size.width,
-                            'assets/images/one_piece_logo.png')
-                        : Image.asset(
-                            width: MediaQuery.of(context).size.width,
-                            item,
-                            fit: BoxFit.fill,
-                          ),
-                  )
-                  .toList(),
-            ),
-            DotsIndicator(
-              dotsCount: itemsList.length,
-              position: _current.toDouble(),
-              decorator: DotsDecorator(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0)),
-                activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0)),
-                size: const Size(8, 8),
-                activeSize: const Size(18, 8),
+              // one piece exclusives
+              HomeScrollView(
+                itemsList: itemsList,
+                heading: "One piece Originals and Exclusives >",
+                width: MediaQuery.of(context).size.width / 3,
               ),
-            )
-          ],
+              // top arcs
+              HomeScrollView(
+                  itemsList: itemsList,
+                  width: MediaQuery.of(context).size.width / 2,
+                  heading: "Top ARCS >")
+            ],
+          ),
         ),
       ),
     );
