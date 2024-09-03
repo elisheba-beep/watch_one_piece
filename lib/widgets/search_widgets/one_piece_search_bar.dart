@@ -14,6 +14,9 @@ class _SearchBarState extends State<OnePieceSearchBar> {
     return Container(
       padding: const EdgeInsets.all(16),
       child: TextField(
+        style: TextStyle(
+          color: Theme.of(context).primaryColor,
+        ),
         onChanged: widget.onChanged,
         decoration: InputDecoration(
           labelText: 'Search by arc',

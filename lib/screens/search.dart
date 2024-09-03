@@ -64,7 +64,7 @@ class _SearchState extends State<Search> {
                 itemCount: searchResults.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(searchResults[index]),
+                    title: Text(searchResults[index], style: TextStyle(color: Theme.of(context).primaryColor,),),
                   );
                 },
               ),

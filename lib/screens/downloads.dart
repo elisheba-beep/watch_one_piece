@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watch_one_piece/widgets/shared_widgets/one_piece_list_view.dart';
 
 class Downloads extends StatefulWidget {
   const Downloads({super.key});
@@ -48,56 +49,7 @@ class _DownloadsState extends State<Downloads> {
                 ),
               ],
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(25.0),
-                      child: Image.asset(
-                          height: 150,
-                          width: 200,
-                          'assets/images/carousel1.jpeg'),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Wano Arc",
-                            style: TextStyle(
-                              color: Theme.of(context).secondaryHeaderColor,
-                              fontSize: 22,
-                            ),
-                          ),
-                          Text(
-                            "110 episodes  5.5 GB",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      ">",
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const OnePieceListView(url: 'assets/images/carousel1.jpeg', title: 'Wano Arc', itemCount: 5, numberOfEpisodes: 1,),
             const SizedBox(
               height: 30,
             ),
@@ -121,3 +73,4 @@ class _DownloadsState extends State<Downloads> {
     );
   }
 }
+

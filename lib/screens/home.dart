@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_one_piece/widgets/home_widgets/home_carousel.dart';
 import 'package:watch_one_piece/widgets/home_widgets/home_scrollview.dart';
-import 'package:watch_one_piece/widgets/one_piece_logo.dart';
+import 'package:watch_one_piece/widgets/shared_widgets/one_piece_logo.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

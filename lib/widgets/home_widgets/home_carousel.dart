@@ -42,7 +42,7 @@ class HomeCarousel extends StatelessWidget {
         ),
         DotsIndicator(
           dotsCount: itemsList.length,
-          position: _current.toDouble(),
+          position: _current,
           decorator: DotsDecorator(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0)),
