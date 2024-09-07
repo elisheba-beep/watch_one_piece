@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watch_one_piece/subscreens/test_screen.dart';
 
 class HomeScrollView extends StatelessWidget {
   const HomeScrollView({
@@ -34,25 +35,38 @@ class HomeScrollView extends StatelessWidget {
             children: [
               for (var item in itemsList)
                 itemsList.isEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.asset(
-                              height: 200,
-                              width: width,
-                              'assets/images/one_piece_logo.png'),
+                    ? GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.asset(
+                                height: 200,
+                                width: width,
+                                'assets/images/one_piece_logo.png'),
+                          ),
                         ),
                       )
-                    : Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.asset(
-                            height: 200,
-                            width: width,
-                            item,
-                            fit: BoxFit.fill,
+                    : GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TestScreen(),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.asset(
+                              height: 200,
+                              width: width,
+                              item,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
                       ),

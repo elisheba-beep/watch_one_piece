@@ -18,10 +18,10 @@ class _MyStuffState extends State<MyStuff> {
           padding: const EdgeInsets.only(left: 10.0),
           child: Row(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 child: Icon(Icons.person),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(
@@ -36,43 +36,52 @@ class _MyStuffState extends State<MyStuff> {
         ),
         centerTitle: false,
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.settings,),),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.settings,
+            ),
+          ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          children : [
+          children: [
             Center(
-
-            child: Text(
-              "Watchlist",
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontSize: 24,
+              child: Text(
+                "Watchlist",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 24,
+                ),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "1 video",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                FilledButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Filter",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
             ),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-               children : [
-                 Text("1 video",
-                   style: TextStyle(
-                   fontSize: 20,
-                 ),),
-                 FilledButton(
-                   onPressed: () {},
-                   child: const Text(
-                     "Filter",
-                     style: TextStyle(
-                       fontSize: 20,
-                     ),
-                   ),
-                 ),
-               ],
-             ),
-        const OnePieceListView(url: 'assets/images/carousel1.jpeg', itemCount: 1, title: 'Enies Lobby Arc', numberOfEpisodes: 5)
+            const OnePieceListView(
+                url: 'assets/images/carousel1.jpeg',
+                itemCount: 1,
+                title: 'Enies Lobby Arc',
+                numberOfEpisodes: 5)
           ],
         ),
       ),
