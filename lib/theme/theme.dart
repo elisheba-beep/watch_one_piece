@@ -34,8 +34,6 @@ class MaterialTheme {
       scrim: Color(0xff000000),
       inverseSurface: Color(0xff382e2a),
       inversePrimary: Color(0xffffb4a4),
-      onBackground: Color(0xff000000),
-      background: Color(0xff412A1E),
     );
   }
 
@@ -72,8 +70,6 @@ class MaterialTheme {
       scrim: Color(0xff000000),
       inverseSurface: Color(0xff382e2a),
       inversePrimary: Color(0xffffb4a4),
-      onBackground: Color(0xff000000),
-      background: Color(0xff412A1E),
     );
   }
 
@@ -110,8 +106,6 @@ class MaterialTheme {
       scrim: Color(0xff000000),
       inverseSurface: Color(0xff382e2a),
       inversePrimary: Color(0xffffe7e2),
-      onBackground: Color(0xff000000),
-      background: Color(0xff412A1E),
     );
   }
 
@@ -148,8 +142,6 @@ class MaterialTheme {
       scrim: Color(0xff000000),
       inverseSurface: Color(0xfff0dfd8),
       inversePrimary: Color(0xff904b3c),
-      onBackground: Color(0xff000000),
-      background: Color(0xff412A1E),
     );
   }
 
@@ -186,8 +178,6 @@ class MaterialTheme {
       scrim: Color(0xff000000),
       inverseSurface: Color(0xfff0dfd8),
       inversePrimary: Color(0xff743528),
-      onBackground: Color(0xff000000),
-      background: Color(0xff412A1E),
     );
   }
 
@@ -224,8 +214,6 @@ class MaterialTheme {
       scrim: Color(0xff000000),
       inverseSurface: Color(0xfff0dfd8),
       inversePrimary: Color(0xff4e180d),
-      onBackground: Color(0xff000000),
-      background: Color(0xff412A1E),
     );
   }
 
@@ -241,7 +229,7 @@ class MaterialTheme {
           bodyColor: colorScheme.onSurface,
           displayColor: colorScheme.onSurface,
         ),
-        scaffoldBackgroundColor: colorScheme.background,
+        scaffoldBackgroundColor: colorScheme.surface,
         canvasColor: colorScheme.surface,
       );
 

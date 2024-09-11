@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watch_one_piece/subscreens/test_screen.dart';
+import 'package:watch_one_piece/subscreens/details_screen.dart';
 
 class HomeScrollView extends StatelessWidget {
   const HomeScrollView({
@@ -36,7 +36,14 @@ class HomeScrollView extends StatelessWidget {
               for (var item in itemsList)
                 itemsList.isEmpty
                     ? GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DetailsScreen(),
+                            ),
+                          );
+                        },
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20),
                           child: ClipRRect(
@@ -53,7 +60,7 @@ class HomeScrollView extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const TestScreen(),
+                              builder: (context) => const DetailsScreen(),
                             ),
                           );
                         },

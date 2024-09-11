@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_one_piece/subscreens/details_screen.dart';
 
 class HomeCarousel extends StatelessWidget {
   const HomeCarousel({
@@ -29,13 +30,33 @@ class HomeCarousel extends StatelessWidget {
           items: itemsList
               .map(
                 (item) => itemsList.isEmpty
-                    ? Image.asset(
-                        width: MediaQuery.of(context).size.width,
-                        'assets/images/one_piece_logo.png')
-                    : Image.asset(
-                        width: MediaQuery.of(context).size.width,
-                        item,
-                        fit: BoxFit.fill,
+                    ? GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DetailsScreen(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                            width: MediaQuery.of(context).size.width,
+                            'assets/images/one_piece_logo.png'),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DetailsScreen(),
+                            ),
+                          );
+                        },
+                        child: Image.asset(
+                          width: MediaQuery.of(context).size.width,
+                          item,
+                          fit: BoxFit.fill,
+                        ),
                       ),
               )
               .toList(),
