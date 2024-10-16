@@ -23,7 +23,7 @@ Widget buildMoreDetailsTab() {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           SizedBox(height: 8),
           Text(
-            'Monkey D. Luffy, Roronoa Zoro, Nami',
+            'Monkey D. Luffy, Roronoa Zoro, Nami, Sanji, Usopp, Nico Robin, Tony Tony Chopper, Brook, Jimbei',
           ),
           SizedBox(height: 16),
           Text('Maturity Rating',

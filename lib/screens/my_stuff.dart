@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watch_one_piece/subscreens/details_screen_tabs/settings_screen.dart';
 import 'package:watch_one_piece/widgets/shared_widgets/one_piece_list_view.dart';
 
 class MyStuff extends StatefulWidget {
@@ -37,7 +38,14 @@ class _MyStuffState extends State<MyStuff> {
         centerTitle: false,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SettingsScreen(),
+                ),
+              );
+            },
             icon: const Icon(
               Icons.settings,
             ),
