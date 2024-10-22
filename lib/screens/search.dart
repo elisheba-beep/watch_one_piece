@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:watch_one_piece/models/arc.dart';
+import 'package:watch_one_piece/services/api_service.dart';
+import 'package:watch_one_piece/subscreens/details_screen.dart';
 import 'package:watch_one_piece/widgets/search_widgets/one_piece_search_bar.dart';
 
 class Search extends StatefulWidget {
@@ -9,6 +12,22 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  late Future<List<Arc>> arcs;
+  List<Arc> filteredArcs = [];
+  String searchTerm = '';
+
+  @override
+  void initState() {
+    super.initState();
+    arcs = ApiService().fetchArcs();
+  }
+
+  void updateFilteredArcs(String searchTerm) {
+    setState(() {
+      this.searchTerm = searchTerm;
+    });
+  }
+
   List<String> data = [
     'Water 7',
     'Enies LObby',
@@ -52,25 +71,49 @@ class _SearchState extends State<Search> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            OnePieceSearchBar(
-              onChanged: (value) => onChanged(value),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(searchResults[index], style: TextStyle(color: Theme.of(context).primaryColor,),),
-                  );
-                },
+      body: FutureBuilder<List<Arc>>(
+        future: arcs,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            final allArcs = snapshot.data!;
+            filteredArcs = allArcs
+                .where((arc) =>
+                    arc.name.toLowerCase().contains(searchTerm.toLowerCase()))
+                .toList();
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  OnePieceSearchBar(onChanged: updateFilteredArcs),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: filteredArcs.length,
+                      itemBuilder: (context, index) {
+                        
+                        return ListTile(
+                          title: Text(filteredArcs[index].name),
+                          leading: Image.network(filteredArcs[3].thumbnail),
+                          onTap: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DetailsScreen(),
+                            ),
+                          );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
+            );
+          }
+        },
       ),
     );
   }
