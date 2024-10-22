@@ -96,7 +96,7 @@ class _SearchState extends State<Search> {
                         
                         return ListTile(
                           title: Text(filteredArcs[index].name),
-                          leading: Image.network(filteredArcs[3].thumbnail),
+                          leading: Image.network(filteredArcs[index].thumbnail),
                           onTap: () {
                            Navigator.push(
                             context,
