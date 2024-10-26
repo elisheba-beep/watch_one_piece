@@ -13,7 +13,7 @@ class OnePieceEpisodeCard extends StatelessWidget {
       child: ListTile(
         leading: Image.network(episode.thumbnail, width: 80, fit: BoxFit.cover),
         title: Text(episode.name),
-        subtitle: Text('Episode: ${episode.number}'),
+        subtitle: Text('Episode: ${episode.episodeNumber}'),
         trailing: const Icon(Icons.play_arrow),
         onTap: () {
           // Handle tap to navigate to the episode details screen

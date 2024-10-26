@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:watch_one_piece/subscreens/details_screen_tabs/tab_bar.dart';
 import 'package:watch_one_piece/subscreens/details_screen_tabs/tab_bar_view.dart';
+import 'package:watch_one_piece/subscreens/video_player_screen.dart';
 import 'package:watch_one_piece/widgets/shared_widgets/download_button.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -46,7 +47,14 @@ class DetailsScreen extends StatelessWidget {
                               horizontal: 16, vertical: 8),
                         ),
                         onPressed: () {
-                          // Play episode logic here
+                           Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const VideoPlayerScreen(arcId: 9,
+                    episodeNumber: 747,
+                  ),
+                ),
+              );
                         },
                         icon: const Icon(Icons.play_arrow),
                         label: const Text('Play S1 E1'),

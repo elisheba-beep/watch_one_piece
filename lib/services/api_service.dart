@@ -27,4 +27,19 @@ class ApiService {
       throw Exception('Failed to load episodes');
     }
   }
+
+
+   Future<Episode> fetchEpisode(int arcId, int episodeNumber) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/arcs/$arcId/episodes/by_episode_number/$episodeNumber'),
+    );
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      return Episode.fromJson(json);
+    } else {
+      throw Exception('Failed to load episode');
+    }
+  }
+
 }
