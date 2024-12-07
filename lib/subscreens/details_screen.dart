@@ -47,14 +47,15 @@ class DetailsScreen extends StatelessWidget {
                               horizontal: 16, vertical: 8),
                         ),
                         onPressed: () {
-                           Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VideoPlayerScreen(arcId: 9,
-                    episodeNumber: 747,
-                  ),
-                ),
-              );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const VideoPlayerScreen(
+                                arcId: 9,
+                                episodeNumber: 750,
+                              ),
+                            ),
+                          );
                         },
                         icon: const Icon(Icons.play_arrow),
                         label: const Text('Play S1 E1'),

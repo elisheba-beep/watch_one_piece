@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:better_player/better_player.dart';
 import 'package:watch_one_piece/models/episode.dart';
 import 'package:watch_one_piece/services/api_service.dart';
 
@@ -15,8 +15,8 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late VideoPlayerController _controller;
   late Future<Episode> _episodeFuture;
+  BetterPlayerController? _betterPlayerController;
 
   @override
   void initState() {
@@ -25,18 +25,47 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         ApiService().fetchEpisode(widget.arcId, widget.episodeNumber);
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void _initializeBetterPlayer(String videoUrl) {
+    if (videoUrl.isEmpty || !Uri.tryParse(videoUrl)!.isAbsolute) {
+      print('Invalid or empty video URL: $videoUrl');
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Video Error'),
+          content: const Text('Invalid or inaccessible video URL.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    final betterPlayerDataSource = BetterPlayerDataSource(
+      BetterPlayerDataSourceType.network,
+      videoUrl,
+    );
+
+    _betterPlayerController = BetterPlayerController(
+      const BetterPlayerConfiguration(
+        autoPlay: true,
+        aspectRatio: 16 / 9,
+        controlsConfiguration: BetterPlayerControlsConfiguration(
+          enablePlayPause: true,
+          enableFullscreen: true,
+        ),
+      ),
+      betterPlayerDataSource: betterPlayerDataSource,
+    );
   }
 
-  void _initializeAndPlay(String videoUrl) {
-    _controller = VideoPlayerController.network((videoUrl))
-      ..initialize().then((_) {
-        setState(() {});
-        _controller.play();
-      });
+  @override
+  void dispose() {
+    _betterPlayerController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -51,17 +80,24 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
+            print('Error fetching episode: ${snapshot.error}');
             return const Center(child: Text('Error loading episode'));
           } else if (snapshot.hasData) {
             final episode = snapshot.data!;
-            _initializeAndPlay(episode.videoUrl);
+            print('Video URL: ${episode.videoUrl}');
+
+            if (_betterPlayerController == null) {
+              _initializeBetterPlayer(episode.videoUrl);
+            }
 
             return Column(
               children: [
-                if (_controller.value.isInitialized)
+                if (_betterPlayerController != null)
                   AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
+                    aspectRatio: 16 / 9,
+                    child: BetterPlayer(
+                      controller: _betterPlayerController!,
+                    ),
                   )
                 else
                   const Center(child: CircularProgressIndicator()),
